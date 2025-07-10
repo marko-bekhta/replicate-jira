@@ -7,8 +7,7 @@ import org.hibernate.infra.replicate.jira.service.jira.model.JiraBaseObject;
 public class JiraIssues extends JiraBaseObject {
 
 	public List<JiraIssue> issues;
-	public int startAt;
-	public int maxResults;
-	public int total;
+	public String nextPageToken;
+	public boolean isLast;
 
 }

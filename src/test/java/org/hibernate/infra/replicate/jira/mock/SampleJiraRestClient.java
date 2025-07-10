@@ -182,6 +182,13 @@ public class SampleJiraRestClient implements JiraRestClient {
 	}
 
 	@Override
+	public JiraIssues find(String query, String nextPageToken, int maxResults, List<String> fields) {
+		JiraIssues issues = new JiraIssues();
+		issues.issues = List.of();
+		return issues;
+	}
+
+	@Override
 	public JiraIssues find(String query, int startAt, int maxResults) {
 		JiraIssues issues = new JiraIssues();
 		issues.issues = List.of();

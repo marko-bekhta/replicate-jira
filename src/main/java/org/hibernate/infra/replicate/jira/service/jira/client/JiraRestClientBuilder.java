@@ -243,6 +243,11 @@ public class JiraRestClientBuilder {
 		}
 
 		@Override
+		public JiraIssues find(String query, String nextPageToken, int maxResults, List<String> fields) {
+			return withRetry(() -> delegate.find(query, nextPageToken, maxResults, fields));
+		}
+
+		@Override
 		public JiraIssues find(String query, int startAt, int maxResults) {
 			return withRetry(() -> delegate.find(query, startAt, maxResults));
 		}

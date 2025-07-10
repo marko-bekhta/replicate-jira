@@ -89,7 +89,7 @@ public final class HandlerProjectContext implements AutoCloseable {
 			query = "project = %s ORDER BY key ASC".formatted(project.originalProjectKey(),
 					project.originalProjectKey());
 		}
-		JiraIssues issues = projectGroupContext.sourceJiraClient().find(query, 0, 1);
+		JiraIssues issues = projectGroupContext.sourceJiraClient().find(query, null, 1, List.of("key", "issuelinks"));
 		if (issues.issues.isEmpty()) {
 			return Optional.empty();
 		} else {

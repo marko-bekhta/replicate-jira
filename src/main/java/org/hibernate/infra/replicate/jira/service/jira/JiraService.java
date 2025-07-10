@@ -331,16 +331,16 @@ public class JiraService {
 
 	private void syncByQuery(String query, HandlerProjectGroupContext context, Consumer<JiraIssue> action) {
 		JiraIssues issues = null;
-		int start = 0;
+		String nextPageToken = null;
 		int max = 100;
 		do {
-			issues = context.sourceJiraClient().find(query, start, max);
-			Log.infof("Sync by query \"%s\" will try syncing %s issues.",
-					query.substring(0, Math.min(100, query.length())), issues.total);
+			issues = context.sourceJiraClient().find(query, nextPageToken, max, List.of("*all"));
+			Log.infof("Sync by query \"%s\" will try syncing issues.",
+					query.substring(0, Math.min(100, query.length())));
 			issues.issues.forEach(action);
 
-			start += max;
-		} while (!issues.issues.isEmpty());
+			nextPageToken = issues.nextPageToken;
+		} while (!issues.isLast && nextPageToken != null);
 	}
 
 	private void triggerSyncEvent(JiraIssue jiraIssue, HandlerProjectGroupContext context) {

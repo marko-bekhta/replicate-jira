@@ -106,7 +106,7 @@ class ExportProjectTest {
 
 		CSVFormat csvFormat = CSVFormat.DEFAULT.builder().setHeader(headers.toArray(String[]::new)).build();
 
-		int start = 0;
+		String nextPageToken = null;
 		int max = 100; // this seems to be a limit on the jira side.. requesting more didn't work.
 
 		JiraIssues issues;
@@ -117,7 +117,7 @@ class ExportProjectTest {
 				"target/jira-exported-project-%s-%s.csv".formatted(PROJECT_ID, LocalDate.now()));
 				final CSVPrinter printer = new CSVPrinter(fw, csvFormat)) {
 			do {
-				issues = source.find(query, start, max);
+				issues = source.find(query, nextPageToken, max, List.of("*all"));
 				for (JiraIssue issue : issues.issues) {
 					List<Object> row = new ArrayList<>();
 					row.add(issue.key);
@@ -142,8 +142,8 @@ class ExportProjectTest {
 
 					printer.printRecord(row);
 				}
-				start += max;
-			} while (!issues.issues.isEmpty());
+				nextPageToken = issues.nextPageToken;
+			} while (!issues.isLast && nextPageToken != null);
 		}
 	}
 

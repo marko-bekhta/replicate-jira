@@ -141,6 +141,23 @@ public interface JiraRestClient {
 	@Path("/issueLink/{linkId}")
 	void deleteIssueLink(@PathParam("linkId") String linkId);
 
+	/**
+	 * @param fields
+	 *            A list of fields to return for each issue, use it to retrieve a
+	 *            subset of fields. This parameter accepts a comma-separated list.
+	 *            Expand options include:
+	 *
+	 *            {@code *all} Returns all fields. id Returns only issue IDs. Any
+	 *            issue field, prefixed with a minus to exclude. The default is id.
+	 *
+	 *            Note: By default, this resource returns IDs only.
+	 */
+	@GET
+	@Path("/search/jql")
+	JiraIssues find(@QueryParam("jql") String query, @QueryParam("nextPageToken") String nextPageToken,
+			@QueryParam("maxResults") int maxResults, @QueryParam("fields") List<String> fields);
+
+	// for Jira Data center where there is no /search/jql option available
 	@GET
 	@Path("/search")
 	JiraIssues find(@QueryParam("jql") String query, @QueryParam("startAt") int startAt,

@@ -47,8 +47,9 @@ public class JiraFields extends JiraBaseObject {
 	}
 
 	public static String formatSummary(String summary) {
-		// for some reason Jira server does not like ` in the summaries and can result in very helpful "access denied" error responses
-		return summary.replace( "`", "" );
+		// for some reason Jira server does not like ` in the summaries and can result
+		// in very helpful "access denied" error responses
+		return summary.replace("`", "");
 	}
 
 }
