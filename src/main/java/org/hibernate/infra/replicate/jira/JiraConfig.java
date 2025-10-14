@@ -290,6 +290,13 @@ public interface JiraConfig {
 		 *         {@code "globalId": "appId=5e7d6222-8225-3bcd-be58-5fe3980b0fae&issueId=65806"}
 		 */
 		Optional<String> applicationIdForRemoteLinkType();
+
+		/**
+		 * @return the appId to be used to create a globalId for a remote link, e.g.:
+		 *         Jira Cloud has the format:
+		 *         {@code "globalId": "system=http://www.mycompany.com/support&id=1"}
+		 */
+		Optional<String> systemForRemoteLinkType();
 	}
 
 	interface IssueTypeValueMapping extends ValueMapping {

@@ -21,7 +21,7 @@ import io.quarkus.logging.Log;
 import jakarta.ws.rs.core.UriBuilder;
 
 public abstract class JiraEventHandler implements Runnable {
-	protected static final int MAX_CONTENT_SIZE = 65_535;
+	protected static final int MAX_CONTENT_SIZE = 32_766;
 
 	protected final Long objectId;
 	protected final FailureCollector failureCollector;

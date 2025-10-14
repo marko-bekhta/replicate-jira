@@ -94,17 +94,15 @@ abstract class JiraIssueAbstractEventHandler extends JiraEventHandler {
 		// And if the appid/names are available then we can make it also look as if it
 		// is not a remote link:
 
-		Optional<String> appId = context.projectGroup().issueLinkTypes().applicationIdForRemoteLinkType();
-		link.globalId = appId.map(s -> "appId=%s&issueId=%s".formatted(s, sourceIssue.id))
-				.orElseGet(jiraLink::toString);
+		Optional<String> formattedId = JiraRemoteLink.createGlobalId(context.projectGroup().issueLinkTypes(),
+				sourceIssue.key);
+		link.globalId = formattedId.orElseGet(jiraLink::toString);
 
 		link.relationship = "Upstream issue";
 		link.object.title = sourceIssue.key;
 		link.object.url = jiraLink;
 		link.object.summary = "Link to an upstream JIRA issue, from which this one was cloned.";
 
-		Optional<String> applicationName = context.projectGroup().issueLinkTypes().applicationNameForRemoteLinkType();
-		link.application = applicationName.map(JiraRemoteLink.Application::new).orElse(null);
 		return link;
 	}
 

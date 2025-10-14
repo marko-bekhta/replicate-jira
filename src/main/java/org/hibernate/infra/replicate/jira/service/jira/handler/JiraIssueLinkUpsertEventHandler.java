@@ -86,13 +86,13 @@ public class JiraIssueLinkUpsertEventHandler extends JiraEventHandler {
 		Optional<String> appId = context.projectGroup().issueLinkTypes().applicationIdForRemoteLinkType();
 		link.globalId = appId.map(s -> "appId=%s&issueId=%s".formatted(s, linkedIssueId))
 				.orElseGet(() -> sourceLink.self.toString());
+		Optional<String> formattedId = JiraRemoteLink.createGlobalId(context.projectGroup().issueLinkTypes(),
+				linkedIssueKey);
+		link.globalId = formattedId.orElseGet(jiraLink::toString);
+
 		link.relationship = sourceLink.type.name;
 		link.object.title = linkedIssueKey;
 		link.object.url = jiraLink;
-
-		Optional<String> applicationName = context.projectGroup().issueLinkTypes().applicationNameForRemoteLinkType();
-		link.application = applicationName.map(JiraRemoteLink.Application::new).orElse(null);
-		context.destinationJiraClient().upsertRemoteLink(currentIssue, link);
 	}
 
 	@Override

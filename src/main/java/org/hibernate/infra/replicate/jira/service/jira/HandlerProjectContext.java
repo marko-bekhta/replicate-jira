@@ -72,7 +72,7 @@ public final class HandlerProjectContext implements AutoCloseable {
 	public Long getLargestSyncedJiraIssueKeyNumber() {
 		JiraIssues issues = projectGroupContext.destinationJiraClient()
 				.find("project = %s and summary !~\"%s\" ORDER BY key DESC".formatted(project.projectId(),
-						SYNC_ISSUE_PLACEHOLDER_SUMMARY), 0, 1);
+						SYNC_ISSUE_PLACEHOLDER_SUMMARY), null, 1, List.of("key"));
 		if (issues.issues.isEmpty()) {
 			return 0L;
 		} else {
@@ -100,7 +100,7 @@ public final class HandlerProjectContext implements AutoCloseable {
 	private Long getCurrentLatestJiraIssueKeyNumber() {
 		try {
 			JiraIssues issues = projectGroupContext.destinationJiraClient()
-					.find("project = %s ORDER BY created DESC".formatted(project.projectId()), 0, 1);
+					.find("project = %s ORDER BY created DESC".formatted(project.projectId()), null, 1, List.of("key"));
 			if (issues.issues.isEmpty()) {
 				return 0L;
 			} else {
