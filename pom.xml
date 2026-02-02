@@ -8,7 +8,7 @@
 
     <properties>
         <revision>999-SNAPSHOT</revision>
-        <compiler-plugin.version>3.14.1</compiler-plugin.version>
+        <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -19,7 +19,7 @@
         <version.assertj>3.27.0</version.assertj>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
-        <spotless-maven-plugin.version>3.2.0</spotless-maven-plugin.version>
+        <spotless-maven-plugin.version>3.2.1</spotless-maven-plugin.version>
         <spotless.goal>apply</spotless.goal>
         <quarkus-helm.version>1.2.7</quarkus-helm.version>
     </properties>
