@@ -14,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.30.8</quarkus.platform.version>
+        <quarkus.platform.version>3.31.1</quarkus.platform.version>
         <version.commons-csv>1.14.1</version.commons-csv>
         <version.assertj>3.27.0</version.assertj>
         <skipITs>true</skipITs>
